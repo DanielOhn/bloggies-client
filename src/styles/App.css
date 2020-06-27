@@ -1,0 +1,77 @@
+.App {
+  width: 95%;
+  margin: auto;
+}
+
+/* 
+2 - 3 Colors
+  - Primary (Dark Color)
+  - Secondary (Grey)
+  - Tertiary (Light Grey)
+
+2 Font Weights
+   - Normal (400 - 500)
+   - Heavy (600 - 700)
+*/
+
+/* Header Font Sizes */
+.heading {
+  text-decoration: underline;
+}
+
+h1 {
+  font-size: 32px;
+}
+
+h2 {
+  font-size: 28px;
+}
+
+h3 {
+  font-size: 24px;
+}
+
+/* Font Options between Heavy and Normal */
+.heavy {
+  font-weight: 700;
+  font-family: monospace;
+}
+
+.normal {
+  font-weight: 400;
+  font-family: "Courier New", Courier, monospace;
+}
+
+/* Font Color Options */
+.primary {
+  color: var(--primary);
+}
+
+.secondary {
+  color: var(--secondary);
+}
+
+.light {
+  color: var(--light);
+}
+
+/* URLs and Links */
+
+.link {
+  color: var(--link);
+  text-decoration: none;
+}
+
+/* Icon Buttons */
+
+.icon {
+  border: none;
+  background-color: transparent;
+  width: 64px;
+  fill: var(--link);
+}
+
+.dark-mode {
+  display: flex;
+  justify-content: right;
+}

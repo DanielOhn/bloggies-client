@@ -1,0 +1,61 @@
+:root {
+  --color-mode: "light";
+
+  --bg-lite: #e3f1f7;
+  --prim: #092834;
+  --second: #1a3e4c;
+  --lite: #67afcb;
+  --link-lite: #347b98;
+
+  --bg-dark: #213409;
+  --prim-dark: #eef8e3;
+  --second-dark: #b0dc7a;
+  --lite-dark: #496d1d;
+  --link-dark: #7fbd32;
+}
+
+@media (prefers-color-scheme: dark) {
+  /* 
+  MESS WITH THIS ON WINDOWS 
+  https://hankchizljaw.com/wrote/create-a-user-controlled-dark-or-light-mode/
+  */
+  :root {
+    --color-mode: "dark";
+  }
+
+  :root:not([data-user-color-scheme]) {
+    --bg: var(--bg-dark);
+    --primary: var(--prim-dark);
+    --secondary: var(--second-dark);
+    --light: var(--lite-dark);
+    --link: var(--link-dark);
+  }
+}
+
+[data-user-color-scheme="light"] {
+  --bg: var(--bg-lite);
+  --primary: var(--prim);
+  --secondary: var(--second);
+  --light: var(--lite);
+  --link: var(--link-lite);
+}
+
+[data-user-color-scheme="dark"] {
+  --bg: var(--bg-dark);
+  --primary: var(--prim-dark);
+  --secondary: var(--second-dark);
+  --light: var(--lite-dark);
+  --link: var(--link-dark);
+}
+
+body {
+  margin: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: var(--bg);
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    monospace;
+}
