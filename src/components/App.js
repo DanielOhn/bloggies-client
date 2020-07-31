@@ -1,77 +1,74 @@
-import React from "react"
+import React, { useState, useEffect } from "react"
 import "../styles/App.css"
 
 import DarkMode from "../components/DarkMode"
 
 function App() {
+  const [blogs, setBlogs] = useState({})
+  const [error, setError] = useState()
+
+  useEffect(() => {
+    async function fetchBlogs() {
+      const url = `http://localhost:3001/blogs`
+
+      const res = await fetch(url)
+      const data = await res.json()
+
+      setBlogs(data)
+    }
+
+    fetchBlogs()
+  }, [])
+
+  const onSubmit = (event) => {
+    let blogPost = { name: event.form.name, blog: event.form.blog }
+
+    fetch(`/create-blog`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: blogPost,
+    }).catch((err) => {
+      setError(err)
+    })
+  }
+
+  const listBlogs = Object.keys(blogs).map((i) => {
+    let blog = blogs[i]
+    let title = blog.name
+    let content = blog.blog
+
+    return (
+      <div className="blog" key={i}>
+        <h2>{title}</h2>
+        <p>{content}</p>
+      </div>
+    )
+  })
+
   return (
     <div className="App">
       <div className="content">
-        <h1 className="heading heavy primary">React Template</h1>
-        <p className="normal secondary">
-          This website is created for the purpose of being a template for any
-          new react projects that I create. It will come with the font weights,
-          sizes, and colors, along with npm packages and folder organization
-          that I already use for most of my projects.
-        </p>
+        <section className="blog-section">
+          <h1 className="heading heavy primary">Bloggies</h1>
+          <p className="normal secondary">
+            Welcome! <br />
+            Look at all the cool blogs:
+          </p>
+          {blogs && listBlogs}
+          {error && <div>{error}</div>}
+        </section>
 
-        <p className="normal light">
-          Will probably add components or more content in the future as I
-          develop more sites!
-        </p>
-
-        <h1 className="heading heavy primary">Useful Links</h1>
-        <ul>
-          <li>
-            <a
-              className="link"
-              target="_blank"
-              rel="noopener noreferrer"
-              href="https://www.w3schools.com/colors/colors_monochromatic.asp"
-            >
-              Monochromatic Colors
-            </a>
-          </li>
-          <li>
-            <a
-              className="link"
-              target="_blank"
-              rel="noopener noreferrer"
-              href="https://www.typescriptlang.org/"
-            >
-              Typescript
-            </a>
-          </li>
-          <li>
-            <a
-              className="link"
-              target="_blank"
-              rel="noopener noreferrer"
-              href="https://reacttraining.com/react-router/web/guides/quick-start"
-            >
-              React Router Dom
-            </a>
-          </li>
-        </ul>
-
-        <h1 className="heading heavy primary">Other Stuff</h1>
-        <h1 className="heavy primary">Heading 1 w/ Primary Color</h1>
-        <h2 className="heavy secondary">Heading 2 w/ Secondary Color</h2>
-        <h3 className="heavy light">Heading 3 w/ Light Color</h3>
-
-        <p className="normal secondary">
-          Normal Font for paragraphs and default content. This should be the
-          secondary content that users glance at after the headers.
-        </p>
-        <p className="normal light">
-          Minor details to content that shouldn't distract users that much
-          compared too the normal font color.
-        </p>
-
-        <a className="link" href="/">
-          URL Color w/ no decorations
-        </a>
-
+        <section className="create-section">
+          <form action="/create-blog" method="POST">
+            <input type="text" placeholder="name" name="name" />
+            <textarea type="text" placeholder="blog" name="blog"></textarea>
+            <button type="submit" onClick={() => onSubmit}>
+              Submit
+            </button>
+          </form>
+        </section>
         <DarkMode />
       </div>
     </div>

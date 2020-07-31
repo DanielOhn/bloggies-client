@@ -75,3 +75,19 @@ h3 {
   display: flex;
   justify-content: right;
 }
+
+.create-section form {
+  width: 50%;
+  margin: auto;
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: space-between;
+}
+
+.create-section button {
+  width: 64px;
+}
+
+.blog {
+  border: solid 1px red;
+}
