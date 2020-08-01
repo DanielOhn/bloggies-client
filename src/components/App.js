@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react"
+import ReactMarkdown from "react-markdown"
 import "../styles/App.css"
 
 import DarkMode from "../components/DarkMode"
@@ -41,8 +42,8 @@ function App() {
 
     return (
       <div className="blog" key={i}>
-        <h2>{title}</h2>
-        <p>{content}</p>
+        <h1>{title}</h1>
+        <ReactMarkdown source={content} />
       </div>
     )
   })
