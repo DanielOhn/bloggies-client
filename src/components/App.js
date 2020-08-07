@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react"
-import ReactMarkdown from "react-markdown"
 import "../styles/App.css"
+
+import BlogList from "./BlogList"
 
 import DarkMode from "../components/DarkMode"
 
@@ -42,8 +43,7 @@ function App() {
 
     return (
       <div className="blog" key={i}>
-        <h1>{title}</h1>
-        <ReactMarkdown source={content} />
+        <BlogList name={title} content={content} />
       </div>
     )
   })
