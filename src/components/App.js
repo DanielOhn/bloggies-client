@@ -43,7 +43,7 @@ function App() {
 
     return (
       <div className="blog" key={i}>
-        <BlogList name={title} content={content} />
+        <BlogList id={blog._id} name={title} content={content} />
       </div>
     )
   })

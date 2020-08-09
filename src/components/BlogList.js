@@ -3,33 +3,51 @@ import ReactMarkdown from "react-markdown"
 
 function BlogList(props) {
   const [edit, setEdit] = useState(false)
-  const { name, content } = props
+
+  const [id, setId] = useState(props.id)
+  const [name, setName] = useState(props.name || "")
+  const [content, setContent] = useState(props.content || "")
 
   function onEdit() {
     setEdit(!edit)
   }
 
   const onUpdate = (e) => {
-    let [name, blog] = e.form
-    let updateBlog = { name: name, blog: blog }
+    e.preventDefault()
+    console.log(name, content)
 
-    fetch(`/update-blog`, {
+    let updateBlog = { id: props.id, name: name, blog: content }
+
+    let url = "http://localhost:3001"
+
+    fetch(`${url}/update-blog`, {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(updateBlog),
+    }).catch((err) => {
+      console.log(err)
     })
   }
 
   return (
     <div className="blog-list">
       {edit && (
-        <form>
-          <h1>Title</h1> <input type="text" placeholder={name} />
+        <form onSubmit={onUpdate}>
+          <h1>Title</h1>
+          <input
+            type="text"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            name="name"
+          />
           <p>Blog</p>
-          <textarea type="text" placeholder={content} name="blog"></textarea>
-          <button type="submit" onClick={() => onUpdate}>
-            Update
-          </button>
+          <textarea
+            type="text"
+            value={content}
+            onChange={(e) => setContent(e.target.value)}
+            name="blog"
+          ></textarea>
+          <input type="submit" value="Update" />
         </form>
       )}
       {!edit && (
