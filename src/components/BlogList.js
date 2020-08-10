@@ -7,6 +7,7 @@ function BlogList(props) {
   const [id, setId] = useState(props.id)
   const [name, setName] = useState(props.name || "")
   const [content, setContent] = useState(props.content || "")
+  const [url, setUrl] = useState(`http://localhost:3001`)
 
   function onEdit() {
     setEdit(!edit)
@@ -14,11 +15,8 @@ function BlogList(props) {
 
   const onUpdate = (e) => {
     e.preventDefault()
-    console.log(name, content)
 
     let updateBlog = { id: props.id, name: name, blog: content }
-
-    let url = "http://localhost:3001"
 
     fetch(`${url}/update-blog`, {
       method: "PUT",
@@ -27,6 +25,27 @@ function BlogList(props) {
     }).catch((err) => {
       console.log(err)
     })
+
+    onEdit()
+  }
+
+  const onDelete = (e) => {
+    e.preventDefault()
+
+    let deleteBlog = { id: props.id, name: name }
+
+    fetch(`${url}/delete-blog`, {
+      method: "DELETE",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(deleteBlog),
+    })
+      .then((res) => {
+        if (res.ok) return res.json()
+      })
+      .then((data) => window.location.reload())
+      .catch((err) => {
+        console.log(err)
+      })
   }
 
   return (
@@ -57,6 +76,7 @@ function BlogList(props) {
         </div>
       )}
       <button onClick={onEdit}>edit</button>
+      <button onClick={onDelete}>delete</button>
     </div>
   )
 }

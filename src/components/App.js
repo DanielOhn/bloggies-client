@@ -41,6 +41,7 @@ function App() {
     let title = blog.name
     let content = blog.blog
 
+    console.log(blog._id)
     return (
       <div className="blog" key={i}>
         <BlogList id={blog._id} name={title} content={content} />
