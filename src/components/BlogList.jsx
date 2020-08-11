@@ -4,7 +4,6 @@ import ReactMarkdown from "react-markdown"
 function BlogList(props) {
   const [edit, setEdit] = useState(false)
 
-  const [id, setId] = useState(props.id)
   const [name, setName] = useState(props.name || "")
   const [content, setContent] = useState(props.content || "")
   const [url, setUrl] = useState(`http://localhost:3001`)
