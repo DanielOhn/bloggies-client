@@ -4,9 +4,9 @@ const Users = () => {
   const [username, setUsername] = useState("username")
   const [email, setEmail] = useState("email")
   const [password, setPassword] = useState("password")
-  const [url, setUrl] = useState(`http://localhost:3001`)
+  const [url] = useState(`http://localhost:3001`)
 
-  const onCreate = (e) => {
+  const createUser = (e) => {
     e.preventDefault()
 
     let newUser = { username: username, email: email, password: password }
@@ -26,7 +26,7 @@ const Users = () => {
     <div className="users-list">
       <p>This is the users page:</p>
 
-      <form onSubmit={onCreate}>
+      <form action="/create-user" method="POST" className="user-form">
         <input
           type="text"
           value={username}
