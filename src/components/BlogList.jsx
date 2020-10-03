@@ -6,7 +6,7 @@ function BlogList(props) {
 
   const [name, setName] = useState(props.name || "")
   const [content, setContent] = useState(props.content || "")
-  const [url, setUrl] = useState(`http://localhost:3001`)
+  const [url] = useState(`http://localhost:3001`)
 
   function onEdit() {
     setEdit(!edit)
@@ -41,7 +41,7 @@ function BlogList(props) {
       .then((res) => {
         if (res.ok) return res.json()
       })
-      .then((data) => window.location.reload())
+      .then(() => window.location.reload())
       .catch((err) => {
         console.log(err)
       })
